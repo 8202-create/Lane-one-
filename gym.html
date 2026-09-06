@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gym Planner — Lane One</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="index.html" class="wordmark">Lane One</a>
+    <nav class="site-nav" id="siteNav">
+      <a href="index.html">Home</a>
+      <a href="gym.html" class="active">Gym Planner</a>
+      <a href="run.html">Run Analyzer</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" id="themeToggle" class="ghost-btn" aria-label="Switch theme">Night track</button>
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Plan the week, then check it off.</h1>
+      <p class="lede">Set a workout split for each day, add exercises under it, and tick them off as you go. Saved automatically in this browser.</p>
+    </section>
+
+    <section class="lane-row">
+      <span class="row-tag">Week overview</span>
+      <div class="week-overview" id="weekOverview"></div>
+    </section>
+
+    <section class="lane-row">
+      <div class="day-tabs" id="dayTabs"></div>
+
+      <div class="day-panel">
+        <h2 id="dayTitle">Monday</h2>
+
+        <div class="field" style="max-width: 320px; margin-bottom: 24px;">
+          <label for="workoutType">Workout split for this day</label>
+          <div class="field-combo">
+            <select id="workoutType">
+              <option value="">Rest day</option>
+              <option>Chest &amp; Triceps</option>
+              <option>Back &amp; Biceps</option>
+              <option>Legs</option>
+              <option>Shoulders &amp; Abs</option>
+              <option>Chest &amp; Legs</option>
+              <option>Push</option>
+              <option>Pull</option>
+              <option>Full Body</option>
+              <option>Cardio</option>
+              <option>Custom</option>
+            </select>
+          </div>
+        </div>
+
+        <form id="addExerciseForm" class="run-form" style="border-top:none; padding-top:0;">
+          <div class="field-combo" style="max-width: 400px;">
+            <input type="text" id="exerciseInput" placeholder="Add an exercise, e.g. Bench press 4x8">
+          </div>
+          <button type="submit" class="primary-btn" style="margin-top:16px;">Add exercise</button>
+        </form>
+
+        <div class="exercise-list" id="exerciseList"></div>
+      </div>
+    </section>
+
+    <section class="lane-row">
+      <button type="button" id="resetWeekBtn" class="ghost-btn">Reset this week's checkmarks</button>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <span class="wordmark">Lane One</span>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="gym.html">Gym Planner</a>
+        <a href="run.html">Run Analyzer</a>
+      </nav>
+    </div>
+    <p class="footer-note">Your gym plan is stored in this browser only. Not a substitute for professional training advice.</p>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
+<script src="storage.js"></script>
+<script src="gym.js"></script>
+</body>
+</html>
