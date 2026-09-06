@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analyzer — Lane One</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="index.html" class="wordmark">Lane One</a>
+    <nav class="site-nav" id="siteNav">
+      <a href="run.html">Overview</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="analyzer.html" class="active">Analyzer</a>
+      <a href="profile.html">Profile &amp; Goals</a>
+      <a href="achievements.html">Achievements</a>
+      <a href="benefits.html">Why Run</a>
+      <a href="features.html">Features</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" id="themeToggle" class="ghost-btn" aria-label="Switch theme">Night track</button>
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="entry">
+      <h1>Clock your run, see what it's made of.</h1>
+      <p class="lede">Enter the distance and time. Lane One breaks down your pace, your effort, and how it stacks up — no account, no upload, just your numbers.</p>
+
+      <form id="runForm" class="run-form">
+        <div class="field-row">
+          <div class="field">
+            <label for="distance">Distance</label>
+            <div class="field-combo">
+              <input type="number" id="distance" name="distance" step="0.01" min="0.01" placeholder="5.0" required>
+              <select id="unit" name="unit">
+                <option value="km">km</option>
+                <option value="mi">mi</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Time</label>
+            <div class="field-combo time-combo">
+              <input type="number" id="hours" min="0" placeholder="0" aria-label="Hours">
+              <span class="colon">:</span>
+              <input type="number" id="minutes" min="0" max="59" placeholder="25" aria-label="Minutes">
+              <span class="colon">:</span>
+              <input type="number" id="seconds" min="0" max="59" placeholder="00" aria-label="Seconds">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="weight">Weight <span class="optional">optional, for calorie estimate</span></label>
+            <div class="field-combo">
+              <input type="number" id="weight" name="weight" min="20" max="200" placeholder="70">
+              <span class="unit-suffix">kg</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="upload-row">
+          <label for="fileUpload" class="ghost-btn file-label">Import a GPX or TCX file</label>
+          <input type="file" id="fileUpload" accept=".gpx,.tcx" hidden>
+          <span class="upload-note" id="uploadNote">Auto-fills distance, time, and elevation from a watch export. FIT files aren't supported — export as GPX or TCX instead.</span>
+        </div>
+
+        <details class="advanced-fields">
+          <summary>Advanced data (optional)</summary>
+          <div class="field-row">
+            <div class="field">
+              <label for="elevation">Elevation gain (m)</label>
+              <input type="number" id="elevation" min="0" placeholder="e.g. 45">
+            </div>
+            <div class="field">
+              <label for="heartrate">Average heart rate (bpm)</label>
+              <input type="number" id="heartrate" min="0" placeholder="e.g. 152">
+            </div>
+            <div class="field">
+              <label for="cadence">Average cadence (steps/min)</label>
+              <input type="number" id="cadence" min="0" placeholder="e.g. 168">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="splits">Per-km splits <span class="optional">comma separated, mm:ss</span></label>
+              <input type="text" id="splits" placeholder="4:32, 4:41, 4:38, 4:35, 4:29">
+            </div>
+          </div>
+        </details>
+
+        <button type="submit" class="primary-btn">Analyze run</button>
+      </form>
+    </section>
+
+    <section id="results" class="results" hidden>
+
+      <div class="lane-row pace-row">
+        <div class="pace-block">
+          <span class="pace-label">Your pace</span>
+          <span class="pace-number" id="paceMain">0:00</span>
+          <span class="pace-unit" id="paceUnit">min / km</span>
+          <span class="pace-alt" id="paceAlt"></span>
+        </div>
+        <div class="gauge-block">
+          <svg id="gauge" viewBox="0 0 200 120" aria-hidden="true">
+            <path d="M 20 110 A 80 80 0 0 1 180 110" class="gauge-track"/>
+            <path id="gaugeFill" d="M 20 110 A 80 80 0 0 1 180 110" class="gauge-fill"/>
+            <line id="gaugeNeedle" x1="100" y1="110" x2="100" y2="40" class="gauge-needle"/>
+            <circle cx="100" cy="110" r="5" class="gauge-pivot"/>
+          </svg>
+          <span class="gauge-caption" id="effortLabel">Easy</span>
+        </div>
+      </div>
+
+      <div class="lane-row stats-row">
+        <div class="stat">
+          <span class="stat-value" id="statSpeed">0.0</span>
+          <span class="stat-label">km/h average speed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="statCalories">0</span>
+          <span class="stat-label">calories, estimated</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value" id="statDistancePct">0%</span>
+          <span class="stat-label" id="statDistanceLabel">of a 5K</span>
+        </div>
+      </div>
+
+      <div class="lane-row report-row">
+        <span class="row-tag">Smart analysis</span>
+        <p><strong id="ratingLabel">—</strong></p>
+        <p id="coachReport">—</p>
+        <p id="comparisonLine"></p>
+        <p id="strongestLine"></p>
+        <p id="improvementLine"></p>
+        <p id="focusLine" class="focus-line"></p>
+      </div>
+
+      <div class="lane-row advanced-stats-row" id="advancedStatsRow" hidden>
+        <span class="row-tag">Run details</span>
+        <div class="stats-row" id="advancedStatsGrid"></div>
+      </div>
+
+      <div class="lane-row splits-row" id="splitsRow" hidden>
+        <span class="row-tag">Splits</span>
+        <canvas id="splitsChart" width="600" height="200"></canvas>
+        <p id="splitsSummary" class="footer-note"></p>
+      </div>
+
+      <div class="lane-row comparison-row">
+        <span class="row-tag">Where you rank in nature</span>
+        <p id="comparisonText">—</p>
+      </div>
+
+      <div class="lane-row badges-row">
+        <span class="row-tag">Badges earned this run</span>
+        <div class="badge-list" id="badgeList"></div>
+      </div>
+
+      <div class="lane-row share-row">
+        <span class="row-tag">Share card</span>
+        <canvas id="shareCanvas" width="1000" height="560"></canvas>
+        <div class="share-actions">
+          <button type="button" id="downloadBtn" class="ghost-btn">Download image</button>
+          <button type="button" id="saveRunBtn" class="primary-btn">Save to my log</button>
+          <span id="saveConfirm" class="save-confirm" hidden>Saved to your dashboard ✓</span>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <span class="wordmark">Lane One</span>
+      <nav class="footer-nav">
+        <a href="run.html">Overview</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="analyzer.html">Analyzer</a>
+        <a href="profile.html">Profile &amp; Goals</a>
+      <a href="achievements.html">Achievements</a>
+        <a href="benefits.html">Why Run</a>
+        <a href="features.html">Features</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+    <p class="footer-note">Pace, effort, and calorie figures are estimates based on standard running formulas — not medical advice.</p>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
+<script src="storage.js"></script>
+<script src="charts.js"></script>
+<script src="analyzer.js"></script>
+</body>
+</html>

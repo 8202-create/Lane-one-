@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lane One Gym — Plan, lift, track</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="gym-theme">
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="index.html" class="wordmark">Lane One</a>
+    <nav class="site-nav" id="siteNav">
+      <a href="gym.html" class="active">Overview</a>
+      <a href="gym-dashboard.html">Dashboard</a>
+      <a href="gym-planner.html">Planner</a>
+      <a href="gym-profile.html">Profile &amp; Goals</a>
+      <a href="gym-why.html">Why Gym</a>
+      <a href="gym-features.html">Features</a>
+      <a href="gym-about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" id="themeToggle" class="ghost-btn" aria-label="Switch theme">Night track</button>
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Plan the week. Show up. Check it off.</h1>
+      <p class="lede">Describe what you want and get a full week's split generated instantly — or build it yourself, exercise by exercise. Either way, it's yours to edit whenever you want, saved right in your browser.</p>
+      <div class="hero-actions">
+        <a href="gym-planner.html" class="primary-btn">Build my week</a>
+        <a href="gym-why.html" class="text-link">Why go to the gym?</a>
+      </div>
+    </section>
+
+    <div class="mini-stats">
+      <div class="mini-stat">
+        <span class="mini-stat-value">0</span>
+        <span class="mini-stat-label">accounts required</span>
+      </div>
+      <div class="mini-stat">
+        <span class="mini-stat-value">2</span>
+        <span class="mini-stat-label">sessions allowed per day</span>
+      </div>
+      <div class="mini-stat">
+        <span class="mini-stat-value">1</span>
+        <span class="mini-stat-label">sentence to generate a plan</span>
+      </div>
+      <div class="mini-stat">
+        <span class="mini-stat-value">100%</span>
+        <span class="mini-stat-label">editable, anytime</span>
+      </div>
+    </div>
+
+    <section class="lane-row">
+      <span class="row-tag">Why Lane One's Gym Planner exists</span>
+      <p style="max-width: 58ch;">Most workout-planning apps either lock real programs behind a subscription, or hand you a rigid template you can't touch. This does the opposite: describe your goal in plain language, get a real weekly split back immediately, and then change anything about it — swap an exercise, add a second session on leg day, rename a split — without asking anyone's permission.</p>
+    </section>
+
+    <section>
+      <span class="row-tag" style="display:block; margin: 32px 0 4px;">How it works</span>
+      <div class="steps-list">
+        <div class="step-item">
+          <span class="step-number">1</span>
+          <div class="step-body">
+            <h3>Describe your goal</h3>
+            <p>"4 days a week, build muscle, upper/lower split" — or anything close to that. Lane One turns it into a full week.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <span class="step-number">2</span>
+          <div class="step-body">
+            <h3>Edit it until it's yours</h3>
+            <p>Rename a day's split, add or remove exercises, or stack a second session on any day — nothing is locked.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <span class="step-number">3</span>
+          <div class="step-body">
+            <h3>Check off and log</h3>
+            <p>Tick exercises off as you complete them, then log the day to your history with the date — visible on your dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <span class="row-tag" style="display:block; margin: 32px 0 4px;">What you get</span>
+      <div class="feature-list">
+        <div class="feature-item">
+          <h3>Plan generator</h3>
+          <p>Describe your goal and days available in plain language, and get a complete, sensible weekly split back instantly.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Two sessions per day</h3>
+          <p>Morning cardio and evening lifting on the same day? Stack a second session on any day you want.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Full editing freedom</h3>
+          <p>Every generated plan is a starting point — rename splits, swap exercises, or clear a day entirely.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Workout history &amp; dashboard</h3>
+          <p>Log completed sessions with the date, then track your streak, totals, and achievements over time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <h2>Ready to build your week?</h2>
+      <a href="gym-planner.html" class="primary-btn">Build my week</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <span class="wordmark">Lane One</span>
+      <nav class="footer-nav">
+        <a href="gym.html">Overview</a>
+        <a href="gym-dashboard.html">Dashboard</a>
+        <a href="gym-planner.html">Planner</a>
+        <a href="gym-profile.html">Profile &amp; Goals</a>
+        <a href="gym-why.html">Why Gym</a>
+        <a href="gym-features.html">Features</a>
+        <a href="gym-about.html">About</a>
+      </nav>
+    </div>
+    <p class="footer-note">Your gym plan and history are stored in this browser only. Not a substitute for professional training or medical advice.</p>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
