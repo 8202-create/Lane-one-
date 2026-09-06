@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Lane One</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="index.html" class="wordmark">Lane One</a>
+    <nav class="site-nav" id="siteNav">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="analyzer.html">Analyzer</a>
+      <a href="profile.html">Profile &amp; Goals</a>
+      <a href="features.html">Features</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" id="themeToggle" class="ghost-btn" aria-label="Switch theme">Night track</button>
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Your training, at a glance.</h1>
+      <p class="lede">Every run you save from the Analyzer lands here. This is your full running history, on this browser — no account, nothing sent anywhere.</p>
+    </section>
+
+    <div id="emptyState" class="lane-row" hidden>
+      <p>You haven't saved any runs yet. Head to the <a href="analyzer.html" class="text-link">Analyzer</a> and hit "Save to my log" after your next result.</p>
+    </div>
+
+    <div id="dashboardContent">
+
+      <div class="lane-row stats-row" id="overviewStats"></div>
+
+      <div class="lane-row">
+        <span class="row-tag">Current streak</span>
+        <p id="streakLine" class="stat-value" style="font-size:28px;">—</p>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">This week vs last week</span>
+        <div class="progress-compare" id="weekCompare"></div>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">This month vs last month</span>
+        <div class="progress-compare" id="monthCompare"></div>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">Personal bests</span>
+        <div class="stats-row" id="personalBests"></div>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">Pace over time</span>
+        <canvas id="paceChart" width="600" height="220"></canvas>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">Speed over time</span>
+        <canvas id="speedChart" width="600" height="220"></canvas>
+      </div>
+
+      <div class="lane-row" id="elevationChartRow" hidden>
+        <span class="row-tag">Elevation gain over time</span>
+        <canvas id="elevationChart" width="600" height="220"></canvas>
+      </div>
+
+      <div class="lane-row" id="cadenceChartRow" hidden>
+        <span class="row-tag">Cadence over time</span>
+        <canvas id="cadenceChart" width="600" height="220"></canvas>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">Achievements</span>
+        <div class="badge-list" id="achievementList"></div>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">Recent runs</span>
+        <div class="run-table" id="recentRuns"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <span class="wordmark">Lane One</span>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="analyzer.html">Analyzer</a>
+        <a href="profile.html">Profile &amp; Goals</a>
+        <a href="features.html">Features</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+    <p class="footer-note">Your run history is stored in this browser only. Clearing your browser data will erase it.</p>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
+<script src="storage.js"></script>
+<script src="charts.js"></script>
+<script src="dashboard.js"></script>
+</body>
+</html>
