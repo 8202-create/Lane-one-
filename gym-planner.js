@@ -4,6 +4,13 @@ const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
 const plan = getGymPlan();
 let activeDay = DAYS[0];
 
+// Prefill age/gender from a previously saved profile, if any.
+(() => {
+  const savedProfile = getProfile();
+  if (savedProfile.age) document.getElementById("generatorAge").value = savedProfile.age;
+  if (savedProfile.gender) document.getElementById("generatorGender").value = savedProfile.gender;
+})();
+
 function ensureDay(day) {
   if (!plan[day]) plan[day] = [];
   return plan[day];
@@ -74,10 +81,20 @@ function shuffle(arr) {
   return a;
 }
 
+// Light, general heuristic only — not personalized medical or training advice.
+// For older users, swap heavy low-rep schemes for moderate higher-rep ones.
+function adjustForAge(exerciseName, age) {
+  if (!age || age < 55) return exerciseName;
+  return exerciseName
+    .replace(/5x5/g, "3x10")
+    .replace(/4x6/g, "3x10")
+    .replace(/3x6/g, "3x10");
+}
+
 let idCounter = 0;
 function nextId() { return Date.now() + (idCounter++); }
 
-function generatePlanFromDescription(text) {
+function generatePlanFromDescription(text, age) {
   const templateKey = pickTemplate(text);
   const dayCount = pickDayCount(text, templateKey);
   const sequence = TEMPLATE_SEQUENCES[templateKey];
@@ -91,7 +108,7 @@ function generatePlanFromDescription(text) {
     if (slots[i]) {
       const type = sequence[seqIndex % sequence.length];
       seqIndex++;
-      const exerciseNames = shuffle(EXERCISES_BY_TYPE[type]);
+      const exerciseNames = shuffle(EXERCISES_BY_TYPE[type]).map(name => adjustForAge(name, age));
       newPlan[day] = [{
         id: nextId(),
         type,
@@ -108,7 +125,14 @@ document.getElementById("generateBtn").addEventListener("click", () => {
   const text = document.getElementById("generatorInput").value.trim();
   if (!text) return;
 
-  const generated = generatePlanFromDescription(text);
+  const age = parseInt(document.getElementById("generatorAge").value) || null;
+  const gender = document.getElementById("generatorGender").value || null;
+  const profile = getProfile();
+  if (age) profile.age = age;
+  if (gender) profile.gender = gender;
+  saveProfile(profile);
+
+  const generated = generatePlanFromDescription(text, age);
   DAYS.forEach(d => plan[d] = generated[d]);
   saveGymPlan(plan);
   renderTabs();
