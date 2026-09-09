@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings &amp; Goals — Lane One</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="index.html" class="wordmark">Lane One</a>
+    <nav class="site-nav" id="siteNav">
+      <a href="run.html">Overview</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="analyzer.html">Analyzer</a>
+      <a href="profile.html" class="active">Settings &amp; Goals</a>
+      <a href="achievements.html">Achievements</a>
+      <a href="benefits.html">Why Run</a>
+      <a href="features.html">Features</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" id="themeToggle" class="ghost-btn" aria-label="Switch theme">Switch to light</button>
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Your profile, your goals.</h1>
+      <p class="lede">Saved on this browser alongside your run log — no account needed.</p>
+    </section>
+
+    <section class="lane-row">
+      <span class="row-tag">Runner profile</span>
+      <form id="profileForm" class="run-form">
+        <div class="field-row">
+          <div class="field">
+            <label for="runnerName">Name</label>
+            <div class="field-combo"><input type="text" id="runnerName" placeholder="Your name"></div>
+          </div>
+          <div class="field">
+            <label for="experience">Running experience</label>
+            <div class="field-combo">
+              <select id="experience">
+                <option value="">Not specified</option>
+                <option>Beginner</option>
+                <option>Casual</option>
+                <option>Regular</option>
+                <option>Competitive</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="preferredDistance">Preferred distance</label>
+            <div class="field-combo">
+              <select id="preferredDistance">
+                <option value="">Not specified</option>
+                <option>Sprint / short intervals</option>
+                <option>5K</option>
+                <option>10K</option>
+                <option>Half marathon</option>
+                <option>Marathon</option>
+                <option>Ultra distance</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="primary-btn">Save profile</button>
+        <span id="profileSaved" class="save-confirm" hidden>Saved ✓</span>
+      </form>
+    </section>
+
+    <section class="lane-row">
+      <span class="row-tag">Your running history</span>
+      <div class="stats-row" id="historyStats"></div>
+    </section>
+
+    <section class="lane-row">
+      <span class="row-tag">Set a new goal</span>
+      <form id="goalForm" class="run-form">
+        <div class="field-row">
+          <div class="field">
+            <label for="goalType">Goal type</label>
+            <div class="field-combo">
+              <select id="goalType">
+                <option value="weekly_distance">Run a distance this week</option>
+                <option value="monthly_distance">Run a distance this month</option>
+                <option value="runs_per_week">Run a number of times per week</option>
+                <option value="target_pace">Reach a target average pace</option>
+                <option value="race_distance">Complete a specific race distance</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="goalTarget">Target</label>
+            <div class="field-combo">
+              <input type="number" id="goalTarget" step="0.1" placeholder="e.g. 20">
+              <span class="unit-suffix" id="goalUnit">km</span>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="primary-btn">Add goal</button>
+      </form>
+    </section>
+
+    <section class="lane-row">
+      <span class="row-tag">Your goals</span>
+      <div id="goalsList"></div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <span class="wordmark">Lane One</span>
+      <nav class="footer-nav">
+        <a href="run.html">Overview</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="analyzer.html">Analyzer</a>
+        <a href="profile.html">Settings &amp; Goals</a>
+      <a href="achievements.html">Achievements</a>
+      <a href="benefits.html">Why Run</a>
+        <a href="features.html">Features</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+    <p class="footer-note">Your profile and goals are stored in this browser only.</p>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
+<script src="storage.js"></script>
+<script src="profile.js"></script>
+</body>
+</html>

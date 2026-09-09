@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Lane One Gym</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="gym-theme">
+
+<div class="page">
+
+  <header class="site-header">
+    <a href="index.html" class="wordmark">Lane One</a>
+    <nav class="site-nav" id="siteNav">
+      <a href="gym.html">Overview</a>
+      <a href="gym-dashboard.html" class="active">Dashboard</a>
+      <a href="gym-planner.html">Planner</a>
+      <a href="gym-profile.html">Settings &amp; Goals</a>
+      <a href="gym-why.html">Why Gym</a>
+      <a href="gym-features.html">Features</a>
+      <a href="gym-about.html">About</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" id="themeToggle" class="ghost-btn" aria-label="Switch theme">Switch to light</button>
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Your training, at a glance.</h1>
+      <p class="lede">Every day you log from the Planner lands here. Full history, on this browser only.</p>
+    </section>
+
+    <div id="emptyState" class="lane-row" hidden>
+      <p>No workouts logged yet. Head to the <a href="gym-planner.html" class="text-link">Planner</a> and hit "Log this day to history" once you've checked off some exercises.</p>
+    </div>
+
+    <div class="lane-row">
+      <span class="row-tag">Body weight &amp; measurements</span>
+      <form id="bodyLogForm" class="run-form" style="border-top:none; padding-top:0;">
+        <div class="field-row">
+          <div class="field">
+            <label for="bodyDate">Date</label>
+            <div class="field-combo"><input type="date" id="bodyDate"></div>
+          </div>
+          <div class="field">
+            <label for="bodyWeight">Weight (kg)</label>
+            <div class="field-combo"><input type="number" id="bodyWeight" step="0.1" min="20" max="300" placeholder="e.g. 68.5"></div>
+          </div>
+          <div class="field">
+            <label for="bodyWaist">Waist (cm) <span class="optional">optional</span></label>
+            <div class="field-combo"><input type="number" id="bodyWaist" step="0.1" min="30" max="200"></div>
+          </div>
+          <div class="field">
+            <label for="bodyArms">Arms (cm) <span class="optional">optional</span></label>
+            <div class="field-combo"><input type="number" id="bodyArms" step="0.1" min="10" max="80"></div>
+          </div>
+        </div>
+        <button type="submit" class="primary-btn">Log entry</button>
+      </form>
+
+      <div id="bodyLogEmpty" class="footer-note" style="margin-top:16px;" hidden>No entries yet — log your weight weekly to see a trend here.</div>
+      <div id="bodyLogChartWrap" hidden style="margin-top:24px;">
+        <canvas id="bodyWeightChart" width="600" height="220"></canvas>
+      </div>
+      <div class="history-list" id="bodyLogList"></div>
+    </div>
+
+    <div id="dashboardContent">
+
+      <div class="lane-row stats-row" id="overviewStats"></div>
+
+      <div class="lane-row">
+        <span class="row-tag">Current streak</span>
+        <p id="streakLine" class="stat-value" style="font-size:28px;">—</p>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">This week vs last week</span>
+        <div class="progress-compare" id="weekCompare"></div>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">Achievements</span>
+        <div class="badge-list" id="achievementList"></div>
+      </div>
+
+      <div class="lane-row">
+        <span class="row-tag">Workout history</span>
+        <div class="history-list" id="historyList"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <span class="wordmark">Lane One</span>
+      <nav class="footer-nav">
+        <a href="gym.html">Overview</a>
+        <a href="gym-dashboard.html">Dashboard</a>
+        <a href="gym-planner.html">Planner</a>
+        <a href="gym-profile.html">Settings &amp; Goals</a>
+        <a href="gym-why.html">Why Gym</a>
+        <a href="gym-features.html">Features</a>
+        <a href="gym-about.html">About</a>
+      </nav>
+    </div>
+    <p class="footer-note">Your workout history is stored in this browser only. Clearing browser data will erase it.</p>
+  </footer>
+
+</div>
+
+<script src="main.js"></script>
+<script src="storage.js"></script>
+<script src="charts.js"></script>
+<script src="gym-dashboard.js"></script>
+</body>
+</html>
